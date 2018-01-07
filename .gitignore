@@ -30,3 +30,6 @@
 # Temporary Directories
 /bin
 /cmake.build
+
+# System Files
+.DS_Store
