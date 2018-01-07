@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # build.sh
 # spectreScope
@@ -8,16 +8,16 @@
 #
 
 BUILD_HOME=$(pwd)
-BUILD_CMAKE_HOME=${BUILD_HOME}/cmake
+BUILD_CMAKE_HOME=${BUILD_HOME}/cmake.build
 
-BUILD_TYPE=Release
+BUILD_TYPE=Release # Debug, Release, MinSizeRel, RelWithDebInfo
 
 rm -rf ${BUILD_CMAKE_HOME}
 mkdir -p ${BUILD_CMAKE_HOME}
 
 pushd ${BUILD_CMAKE_HOME} >/dev/null
 
-cmake -DCMAKE_BUILD_TYPE=${BUILD_TARGET} ${BUILD_HOME}
+cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ${BUILD_HOME}
 
 make
 make install
