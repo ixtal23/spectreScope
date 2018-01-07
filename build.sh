@@ -10,7 +10,8 @@
 BUILD_HOME=$(pwd)
 BUILD_CMAKE_HOME=${BUILD_HOME}/cmake.build
 
-BUILD_TYPE=Release # Debug, Release, MinSizeRel, RelWithDebInfo
+# CMake supports the build types: Debug, Release, MinSizeRel, RelWithDebInfo.
+BUILD_TYPE=Release
 
 rm -rf ${BUILD_CMAKE_HOME}
 mkdir -p ${BUILD_CMAKE_HOME}
@@ -18,8 +19,23 @@ mkdir -p ${BUILD_CMAKE_HOME}
 pushd ${BUILD_CMAKE_HOME} >/dev/null
 
 cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ${BUILD_HOME}
-
-make
-make install
+EXIT_CODE=$?
+if [[ $EXIT_CODE -eq 0 ]]; then
+    make
+    EXIT_CODE=$?
+    if [[ $EXIT_CODE -eq 0 ]]; then
+        make install
+        EXIT_CODE=$?
+        if [[ $EXIT_CODE -ne 0 ]]; then
+            echo "ERROR: Make install failed with exit code $EXIT_CODE"
+        fi
+    else
+        echo "ERROR: Make failed with exit code $EXIT_CODE"
+    fi
+else
+    echo "ERROR: CMake failed with exit code $EXIT_CODE"
+fi
 
 popd >/dev/null
+
+exit $EXIT_CODE

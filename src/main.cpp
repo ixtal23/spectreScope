@@ -68,9 +68,9 @@ static inline void __attribute__((__always_inline__)) flushCache(void const* p) 
 
 // The function gets the current value of Time Stamp Counter (https://en.wikipedia.org/wiki/Time_Stamp_Counter).
 static inline uint64_t __attribute__((__always_inline__)) readTimeStampCounter(uint32_t& cpu) {
-#if defined(USE_INTRINSIC_RDTSCP)
+#if USE_INTRINSIC_RDTSCP == 1
     return __rdtscp(&cpu);
-#elif defined(USE_CUSTOM_RDTSCP)
+#else
     uint32_t eax, edx;
 
     asm volatile (
@@ -81,8 +81,6 @@ static inline uint64_t __attribute__((__always_inline__)) readTimeStampCounter(u
     );
 
     return (uint64_t(edx) << 32) | uint64_t(eax);
-#else
-    #error The implementation of readTimeStampCounter function is not defined
 #endif
 }
 
