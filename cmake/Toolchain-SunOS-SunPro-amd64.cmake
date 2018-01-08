@@ -6,9 +6,9 @@
 # Copyright © 2018 Maxim Morozov. All rights reserved.
 #
 
-set(CMAKE_SYSTEM_NAME SunOS)
+set(CMAKE_SYSTEM_NAME "SunOS")
 
-set(CMAKE_CXX_COMPILER CC)
+set(CMAKE_CXX_COMPILER "CC")
 
 set(CMAKE_CXX_FLAGS_INIT                "-xarch=sse2 -m64 -errwarn=%all")
 set(CMAKE_CXX_FLAGS_DEBUG_INIT          "-O0 -g0")

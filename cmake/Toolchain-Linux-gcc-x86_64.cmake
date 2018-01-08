@@ -6,9 +6,9 @@
 # Copyright © 2018 Maxim Morozov. All rights reserved.
 #
 
-set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_NAME "Linux")
 
-set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_COMPILER "g++")
 
 set(CMAKE_CXX_FLAGS_INIT                "-march=native -m64 -std=c++14 -Werror")
 set(CMAKE_CXX_FLAGS_DEBUG_INIT          "-O0 -ggdb")
