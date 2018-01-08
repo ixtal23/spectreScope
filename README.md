@@ -1,12 +1,57 @@
 # spectreScope
 The demo of the speculative execution attack Spectre (CVE-2017-5753, CVE-2017-5715).
 
-## Supported Platforms
+## Tested On
 
 * macOS
+
+        Intel
+            - Apple MacBook Pro Retina, 15-inch, Late 2013
+            - macOS High Sierra 10.13.2
+            - 1 Intel(R) Core(TM) i7-4750HQ CPU @ 2.00GHz
+            - git 2.14.3
+            - cmake 3.10.1
+            - Xcode 9.2
+
 * Linux
+
+        Intel
+            - HP ProLiant BL660C GEN8
+            - VHS server on VMware ESXi
+            - Red Hat Enterprise Linux Server 7.4 / GNU/Linux 3.10.0-693.1.1.e17.x86_64
+            - 2 Intel(R) Xeon(R) CPU E5-4620 @ 2.20GHz
+            - git 1.9.4
+            - cmake 2.8.12.2
+            - GCC 5.3.1
+
+            - HP ProLiant DL380 G7
+            - Red Hat Enterprise Linux Server 7.4 / GNU/Linux 3.10.0-693.1.1.e17.x86_64
+            - 2 Intel(R) Xeon(R) CPU X5680 @ 3.33GHz
+            - git 1.9.4
+            - cmake 2.8.12.2
+            - GCC 5.3.1
+
 * Oracle Solaris
-* Windows (not tested)
+
+        Intel
+            - HP ProLiant DL380 G7
+            - Oracle Solaris 10
+            - 2 Intel(R) Xeon(R) CPU X5680 @ 3.33GHz
+            - git 1.9.4
+            - cmake 2.8.12.2
+            - Oracle Solaris Studio 12.3
+
+        AMD
+            - Sun Fire X4600 M2
+            - Oracle Solaris 10
+            - 4 AMD Opteron(tm) CPU 8220 @ 2.8GHz
+            - git 1.9.4
+            - cmake 2.8.12.2
+            - Oracle Solaris Studio 12.3
+
+* Windows
+
+    The support of this platform was implemented but is not tested yet.
 
 ## Preconditions
 
