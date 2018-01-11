@@ -23,7 +23,10 @@
     #define USE_INTRINSIC_RDTSCP 1
 #elif defined(__sun)
     #include <stdint.h>
-    #include <immintrin.h> // _mm_clflush
+
+    #if !defined(__sparc)
+        #include <immintrin.h> // _mm_clflush
+    #endif
 
     // Orace Solaris Studio compiler has no an intrinsic function for rdtscp instruction.
     #define USE_INTRINSIC_RDTSCP 0
@@ -63,7 +66,16 @@ const char NON_PRINTABLE_CHARACTER = '?';
 
 // The function flushes and invalidates a cache line that contains the address p from all caches in the coherency domain.
 static inline void __attribute__((__always_inline__)) flushCache(void const* p) {
-    _mm_clflush(p);
+    #if defined(__sparc)
+        asm volatile (
+            "flush %0" // assembler template
+            : "r" (p)  // output operands
+            :          // no input operands
+            : "memory" // clobbers
+        );
+    #else
+        _mm_clflush(p);
+    #endif
 }
 
 // The function gets the current value of Time Stamp Counter (https://en.wikipedia.org/wiki/Time_Stamp_Counter).
@@ -71,16 +83,30 @@ static inline uint64_t __attribute__((__always_inline__)) readTimeStampCounter(u
 #if USE_INTRINSIC_RDTSCP == 1
     return __rdtscp(&cpu);
 #else
-    uint32_t eax, edx;
+    #if defined(__sparc)
+        uint64_t r;
 
-    asm volatile (
-        "rdtscp"                             // assembler template
-        : "=a" (eax), "=d" (edx), "=c" (cpu) // output operands
-        :                                    // no input operands
-        :                                    // no clobbers, thecompiler defines them automatically by output operands
-    );
+        asm volatile (
+            "rd %%tick, %0\n\t" // assembler template
+            "mov %0, %0"
+            : "=r" (r)          // output operands
+            :                   // no input operands
+            : "memory"          // clobbers
+        );
 
-    return (uint64_t(edx) << 32) | uint64_t(eax);
+        return r & ~(1UUl << 63); //
+    #else
+        uint32_t eax, edx;
+
+        asm volatile (
+            "rdtscp"                             // assembler template
+            : "=a" (eax), "=d" (edx), "=c" (cpu) // output operands
+            :                                    // no input operands
+            :                                    // no clobbers, the compiler defines them automatically by output operands
+        );
+
+        return (uint64_t(edx) << 32) | uint64_t(eax);
+    #endif
 #endif
 }
 
