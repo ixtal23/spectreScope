@@ -94,7 +94,7 @@ static inline uint64_t __attribute__((__always_inline__)) readTimeStampCounter(u
             : "memory"          // clobbers
         );
 
-        return r & ~(1UUl << 63); //
+        return r & ~(1ULL << 63); //
     #else
         uint32_t eax, edx;
 
