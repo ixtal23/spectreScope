@@ -49,6 +49,14 @@ The demo of the speculative execution attack Spectre (CVE-2017-5753, CVE-2017-57
             - cmake 2.8.12.2
             - Oracle Solaris Studio 12.3
 
+        SPARC (NOT REPRODUCED!)
+            - Sun SPARC Enterprise M5000 Server
+            - Oracle Solaris 10
+            - 4 SPARC v9 CPU @ 2.15GHz
+            - git 1.9.4
+            - cmake 2.8.12.2
+            - Oracle Solaris Studio 12.3
+
 * Windows
 
     The support of this platform was implemented but is not tested yet.
