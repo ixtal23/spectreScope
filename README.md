@@ -31,6 +31,13 @@ The demo of the speculative execution attack Spectre (CVE-2017-5753, CVE-2017-57
             - cmake 2.8.12.2
             - GCC 5.3.1
 
+            - DigitalOcean 5$ Droplet
+            - CentOS Linux 7.4.1708 / GNU/Linux 3.10.0-693.11.6.el7.x86_64
+            - 1 Intel(R) Xeon(R) CPU E5-2630L v2 @ 2.40GHz
+            - git 1.8.3.1
+            - cmake 2.8.12.2
+            - GCC 4.8.5
+
 * Oracle Solaris
 
         Intel
@@ -185,5 +192,122 @@ Reading 44 bytes
 42 reading at malicious_x=0xfffffffffffffe93: success value=0x65 [ e ] score=  2
 43 reading at malicious_x=0xfffffffffffffe94: success value=0x6c [ l ] score=  2
 44 reading at malicious_x=0xfffffffffffffe95: success value=0x21 [ ! ] score=  2
+spectreScope$
+```
+
+### DigitalOcean 5$ Droplet, CentOS Linux 7.4.1708, Intel(R) Xeon(R) CPU E5-2630L v2 @ 2.40GHz
+
+```
+spectreScope$ git --version
+git version 1.8.3.1
+spectreScope$ cmake --version
+cmake version 2.8.12.2
+spectreScope$ gcc --version
+gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-16)
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+spectreScope$ ./build.sh
+-- The CXX compiler identification is GNU 4.8.5
+-- Check for working CXX compiler: g++
+-- Check for working CXX compiler: g++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/spectreScope/cmake.build
+/usr/bin/cmake -H/home/user/spectreScope -B/home/user/spectreScope/cmake.build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/user/spectreScope/cmake.build/CMakeFiles /home/user/spectreScope/cmake.build/CMakeFiles/progress.marks
+make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory `/home/user/spectreScope/cmake.build'
+make -f CMakeFiles/spectreScope.dir/build.make CMakeFiles/spectreScope.dir/depend
+make[2]: Entering directory `/home/user/spectreScope/cmake.build'
+cd /home/user/spectreScope/cmake.build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/user/spectreScope /home/user/spectreScope /home/user/spectreScope/cmake.build /home/user/spectreScope/cmake.build /home/user/spectreScope/cmake.build/CMakeFiles/spectreScope.dir/DependInfo.cmake --color=
+Scanning dependencies of target spectreScope
+make[2]: Leaving directory `/home/user/spectreScope/cmake.build'
+make -f CMakeFiles/spectreScope.dir/build.make CMakeFiles/spectreScope.dir/build
+make[2]: Entering directory `/home/user/spectreScope/cmake.build'
+/usr/bin/cmake -E cmake_progress_report /home/user/spectreScope/cmake.build/CMakeFiles 1
+[100%] Building CXX object CMakeFiles/spectreScope.dir/src/main.cpp.o
+/usr/bin/g++    -march=native -m64 -std=c++11 -Werror -O3 -g0   -o CMakeFiles/spectreScope.dir/src/main.cpp.o -c /home/user/spectreScope/src/main.cpp
+Linking CXX executable spectreScope
+/usr/bin/cmake -E cmake_link_script CMakeFiles/spectreScope.dir/link.txt --verbose=1
+/usr/bin/g++    -march=native -m64 -std=c++11 -Werror -O3 -g0    CMakeFiles/spectreScope.dir/src/main.cpp.o  -o spectreScope -rdynamic 
+make[2]: Leaving directory `/home/user/spectreScope/cmake.build'
+/usr/bin/cmake -E cmake_progress_report /home/user/spectreScope/cmake.build/CMakeFiles  1
+[100%] Built target spectreScope
+make[1]: Leaving directory `/home/user/spectreScope/cmake.build'
+/usr/bin/cmake -E cmake_progress_start /home/user/spectreScope/cmake.build/CMakeFiles 0
+/usr/bin/cmake -H/home/user/spectreScope -B/home/user/spectreScope/cmake.build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/user/spectreScope/cmake.build/CMakeFiles /home/user/spectreScope/cmake.build/CMakeFiles/progress.marks
+make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory `/home/user/spectreScope/cmake.build'
+make -f CMakeFiles/spectreScope.dir/build.make CMakeFiles/spectreScope.dir/depend
+make[2]: Entering directory `/home/user/spectreScope/cmake.build'
+cd /home/user/spectreScope/cmake.build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/user/spectreScope /home/user/spectreScope /home/user/spectreScope/cmake.build /home/user/spectreScope/cmake.build /home/user/spectreScope/cmake.build/CMakeFiles/spectreScope.dir/DependInfo.cmake --color=
+make[2]: Leaving directory `/home/user/spectreScope/cmake.build'
+make -f CMakeFiles/spectreScope.dir/build.make CMakeFiles/spectreScope.dir/build
+make[2]: Entering directory `/home/user/spectreScope/cmake.build'
+make[2]: Nothing to be done for `CMakeFiles/spectreScope.dir/build'.
+make[2]: Leaving directory `/home/user/spectreScope/cmake.build'
+/usr/bin/cmake -E cmake_progress_report /home/user/spectreScope/cmake.build/CMakeFiles  1
+[100%] Built target spectreScope
+make[1]: Leaving directory `/home/user/spectreScope/cmake.build'
+/usr/bin/cmake -E cmake_progress_start /home/user/spectreScope/cmake.build/CMakeFiles 0
+make -f CMakeFiles/Makefile2 preinstall
+make[1]: Entering directory `/home/user/spectreScope/cmake.build'
+make[1]: Nothing to be done for `preinstall'.
+make[1]: Leaving directory `/home/user/spectreScope/cmake.build'
+Install the project...
+/usr/bin/cmake -P cmake_install.cmake
+-- Install configuration: "Release"
+-- Installing: /home/user/spectreScope/bin/spectreScope
+spectreScope$ ./run.sh
+Spectre Attack
+Reading 44 bytes
+ 1 reading at malicious_x=0xffffffffffdff840: success value=0x59 [ Y ] score= 11, second best value=0x01 [ ? ] score=  3
+ 2 reading at malicious_x=0xffffffffffdff841: success value=0x6f [ o ] score=  2
+ 3 reading at malicious_x=0xffffffffffdff842: success value=0x75 [ u ] score=  2
+ 4 reading at malicious_x=0xffffffffffdff843: success value=0x72 [ r ] score=  2
+ 5 reading at malicious_x=0xffffffffffdff844: success value=0x20 [   ] score=  2
+ 6 reading at malicious_x=0xffffffffffdff845: success value=0x43 [ C ] score= 15, second best value=0x01 [ ? ] score=  5
+ 7 reading at malicious_x=0xffffffffffdff846: success value=0x50 [ P ] score=  2
+ 8 reading at malicious_x=0xffffffffffdff847: success value=0x55 [ U ] score= 95, second best value=0x02 [ ? ] score= 45
+ 9 reading at malicious_x=0xffffffffffdff848: success value=0x20 [   ] score=  2
+10 reading at malicious_x=0xffffffffffdff849: success value=0x69 [ i ] score=  7, second best value=0x02 [ ? ] score=  1
+11 reading at malicious_x=0xffffffffffdff84a: success value=0x73 [ s ] score=  2
+12 reading at malicious_x=0xffffffffffdff84b: success value=0x20 [   ] score= 11, second best value=0x02 [ ? ] score=  3
+13 reading at malicious_x=0xffffffffffdff84c: success value=0x63 [ c ] score=  2
+14 reading at malicious_x=0xffffffffffdff84d: success value=0x72 [ r ] score= 73, second best value=0x02 [ ? ] score= 34
+15 reading at malicious_x=0xffffffffffdff84e: success value=0x61 [ a ] score=  2
+16 reading at malicious_x=0xffffffffffdff84f: success value=0x70 [ p ] score=  7, second best value=0x02 [ ? ] score=  1
+17 reading at malicious_x=0xffffffffffdff850: success value=0x2e [ . ] score=  2
+18 reading at malicious_x=0xffffffffffdff851: success value=0x20 [   ] score= 43, second best value=0x02 [ ? ] score= 19
+19 reading at malicious_x=0xffffffffffdff852: success value=0x54 [ T ] score=  2
+20 reading at malicious_x=0xffffffffffdff853: success value=0x68 [ h ] score= 57, second best value=0x02 [ ? ] score= 26
+21 reading at malicious_x=0xffffffffffdff854: success value=0x61 [ a ] score=  7, second best value=0x02 [ ? ] score=  1
+22 reading at malicious_x=0xffffffffffdff855: success value=0x6e [ n ] score=  2
+23 reading at malicious_x=0xffffffffffdff856: success value=0x6b [ k ] score=  2
+24 reading at malicious_x=0xffffffffffdff857: success value=0x20 [   ] score= 17, second best value=0x02 [ ? ] score=  6
+25 reading at malicious_x=0xffffffffffdff858: success value=0x79 [ y ] score=  2
+26 reading at malicious_x=0xffffffffffdff859: success value=0x6f [ o ] score= 27, second best value=0x02 [ ? ] score= 11
+27 reading at malicious_x=0xffffffffffdff85a: success value=0x75 [ u ] score=  2
+28 reading at malicious_x=0xffffffffffdff85b: success value=0x20 [   ] score=  9, second best value=0x02 [ ? ] score=  2
+29 reading at malicious_x=0xffffffffffdff85c: success value=0x76 [ v ] score=  2
+30 reading at malicious_x=0xffffffffffdff85d: success value=0x65 [ e ] score= 41, second best value=0x02 [ ? ] score= 18
+31 reading at malicious_x=0xffffffffffdff85e: success value=0x72 [ r ] score=  2
+32 reading at malicious_x=0xffffffffffdff85f: success value=0x79 [ y ] score= 33, second best value=0x02 [ ? ] score= 14
+33 reading at malicious_x=0xffffffffffdff860: success value=0x20 [   ] score=  2
+34 reading at malicious_x=0xffffffffffdff861: success value=0x6d [ m ] score=  2
+35 reading at malicious_x=0xffffffffffdff862: success value=0x75 [ u ] score= 33, second best value=0x02 [ ? ] score= 14
+36 reading at malicious_x=0xffffffffffdff863: success value=0x63 [ c ] score=  2
+37 reading at malicious_x=0xffffffffffdff864: success value=0x68 [ h ] score=  7, second best value=0x02 [ ? ] score=  1
+38 reading at malicious_x=0xffffffffffdff865: success value=0x20 [   ] score=  2
+39 reading at malicious_x=0xffffffffffdff866: success value=0x49 [ I ] score= 47, second best value=0x02 [ ? ] score= 21
+40 reading at malicious_x=0xffffffffffdff867: success value=0x6e [ n ] score=  2
+41 reading at malicious_x=0xffffffffffdff868: success value=0x74 [ t ] score= 15, second best value=0x02 [ ? ] score=  5
+42 reading at malicious_x=0xffffffffffdff869: success value=0x65 [ e ] score=  2
+43 reading at malicious_x=0xffffffffffdff86a: success value=0x6c [ l ] score= 27, second best value=0x02 [ ? ] score= 11
+44 reading at malicious_x=0xffffffffffdff86b: success value=0x21 [ ! ] score=  2
 spectreScope$
 ```
